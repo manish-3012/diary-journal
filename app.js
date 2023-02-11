@@ -1,5 +1,43 @@
 //jshint esversion:6
 
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const uri = "mongodb+srv://zephyr007:Sahum6703%40@cluster0.cjacmuw.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+async function main(){
+  try{
+    await client.connect();
+    await fetchAll(client);
+  } catch(e){
+    console.error(e);
+  } finally{
+    // client.close()
+  }
+}
+
+main().catch(console.error);
+
+var postsDB;
+async function fetchAll(client){
+  const cursor = await client.db("blog").collection("posts").find();
+
+  postsDB = await cursor.toArray();
+  // console.log(postsDB);
+}
+
+async function insertNew(client, newItem){
+  await client.db("blog").collection("posts").insertOne(newItem);
+  fetchAll(client);
+
+  console.log(`${postsDB.insertedCount} New listing created with the following id(s): `);
+  console.log(postsDB.insertedIds);
+}
+
+async function deleteFromDB(client, postTitleToDel){
+  var result = await client.db("blog").collection("posts").deleteOne({title:postTitleToDel});
+  
+  console.log(result);
+}
+
 const express = require("express");
 const ejs = require("ejs");
 
@@ -10,8 +48,6 @@ const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui 
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
-var posts = [];
-
 const app = express();
 
 app.use(express.urlencoded({extended:true}));
@@ -20,8 +56,11 @@ app.set('view engine', 'ejs');
 
 app.use(express.static("public"));
 
-app.get("/",function(req,res){
-  res.render("home",{content:homeStartingContent, posts:posts});
+app.get("/",async function(req,res){
+
+  await fetchAll(client);
+  
+  res.render("home",{content:homeStartingContent, items:postsDB});
 });
 
 app.get("/about",function(req,res){
@@ -36,33 +75,43 @@ app.get("/compose",function(req,res){
   res.render("compose");
 });
 
-// whenever we will open localhost:3000/posts/manish
-// manish will be printed in the console as postName will be manish
-app.get("/posts/:postName",function(req,res){
-
-  const requestedTitle = _.lowerCase(req.params.postName);
-  // console.log(requestedTitle);
+app.post("/compose", async function(req,res){
+  const newTitle = req.body.postTitle;
+  const newBody = req.body.postBody;
   
-  posts.forEach(function(post){
-    const storedTitle = _.lowerCase(post.title);
-    // console.log(storedTitle);
-
-    if(requestedTitle === storedTitle){
-      res.render("post",{title:post.title, content:post.body});
-    }
+  await insertNew(client,{
+    title: newTitle,
+    body: newBody
   });
+  res.redirect("/");
 });
 
-app.post("/compose",function(req,res){
-  const post = {
-    title: req.body.postTitle,
-    body: req.body.postBody
-  };
+// whenever we will open localhost:3000/postsDB/manish
+// manish will be printed in the console as postName will be manish
+app.get("/posts/:postId",function(req,res){
+  
+  // console.log(req.params);
+  const requestedId = _.lowerCase(req.params.postId);
+  
+  // console.log(postsDB);
+  for (let i = 0; i < postsDB.length; i++) {
+    const storedId = _.lowerCase(postsDB[i]._id);
+    // console.log(storedTitle);
+    
+    if(requestedId === storedId){
+      res.render("post",{title:postsDB[i].title, body:postsDB[i].body, id: postsDB[i]._id});
+    }
+    
+  }
+});
 
-  posts.push(post);
+app.post("/delete",async function(req,res){
+  var postTitleToDel = req.body.del;
+  
+  await deleteFromDB(client,postTitleToDel);
   res.redirect("/");
 });
 
 app.listen(3000, function() {
-  console.log("Server started on port 3000");
+    console.log("Server started on port 3000");
 });

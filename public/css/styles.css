@@ -12,6 +12,27 @@
     letter-spacing: 5px;
 }
 
+.navTitle{
+    font-family: 'Playfair Display', serif;;
+}
+
+.title{
+    font-family: 'Abril Fatface', cursive;
+    font-size: xx-large;
+    color: rgb(105, 118, 122);
+}
+
+.composeTitle{
+    font-family: 'Abril Fatface', cursive;
+    color: rgb(105, 118, 122);
+    font-size: large;
+}
+
+.content{
+    font-family: 'Caveat', cursive;
+    font-size: large;
+}
+
 .navbar-nav  li a:hover {
     color: #1abc9c !important;
 }

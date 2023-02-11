@@ -1,12 +1,12 @@
 <%- include("partials/header"); -%>
 
-    <h1>Compose</h1>
+    <h1 class="title h2 fw-bold text-center">Compose</h1>
     <form  action="/compose" method="post" autocomplete="off">
         <div class="form-group">
-            <label class="form-check-label"  for="title">Title</label>
-            <input class="form-group form-control auto"  type="text" name="postTitle">
+            <label class="form-check-label "  for="title">Title</label>
+            <input class="form-group form-control composeTitle auto "  type="text" name="postTitle">
             <label class="form-check-label" for="title">Post</label>
-            <textarea class="form-group form-control" id="exampleFormControlTextarea1" name="postBody" rows="3"></textarea>
+            <textarea class="form-group form-control content" id="exampleFormControlTextarea1" name="postBody" rows="10"></textarea>
         </div>
             <button class="btn-primary btn " type="submit" name="button">Publish</button>    
     </form>

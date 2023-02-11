@@ -1,11 +1,11 @@
 <%- include("partials/header"); -%>
-    <h1>Home</h1>
-    <p> <%= content %> </p>
-
-    <% posts.forEach(function(post){ %>
-        <h1> <%= post.title %> </h1>
-        <p> <%= post.body.substr(0,100)  %>...  </p>
-        <a href="/posts/<%= post.title %>">Read More</a>
-    <% }); %>
+    <h1 class="title h2 fw-bold text-center">Home</h1>
+    <p class="content"> <%= content %> </p>
+    <hr class="bold">
+    <% for(var i=0; i<items.length; i++){ %>
+        <h1 class="title h2 fw-bold"><%= items[i].title %></h1>
+        <p class="content"> <%= items[i].body?.substring(0,100) %>... <span><a  class="content" href="/posts/<%= items[i]._id %>">read more</a></span>  </p>
+        
+    <% } %>
 
 <%- include("partials/footer"); -%>
