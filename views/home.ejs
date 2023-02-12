@@ -5,7 +5,7 @@
     <% for(var i=0; i<items.length; i++){ %>
         <h1 class="title h2 fw-bold"><%= items[i].title %></h1>
         <p class="content"> <%= items[i].body?.substring(0,100) %>... <span><a  class="content" href="/posts/<%= items[i]._id %>">read more</a></span>  </p>
-        
+        <hr>
     <% } %>
 
 <%- include("partials/footer"); -%>
