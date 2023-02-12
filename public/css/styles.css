@@ -13,13 +13,13 @@
 }
 
 .navTitle{
-    font-family: 'Playfair Display', serif;;
+    font-family: 'Playfair Display', serif;
 }
 
 .title{
-    font-family: 'Abril Fatface', cursive;
+    font-family: 'Mr Dafoe', cursive;
     font-size: xx-large;
-    color: rgb(105, 118, 122);
+    color: rgb(143, 56, 56);
 }
 
 .composeTitle{
@@ -29,8 +29,9 @@
 }
 
 .content{
-    font-family: 'Caveat', cursive;
-    font-size: large;
+    font-family: 'Lora', serif ;
+    font-style: italic;
+    font-size: medium;
 }
 
 .navbar-nav  li a:hover {
