@@ -1,6 +1,57 @@
 <%- include("partials/header"); -%>
-    <h1 class="title h2 fw-bold text-center">Contact</h1>
-    
-    <p class="content"> <%= content %> </p>
+    <!-- header -->
+    <header class="masthead" style="background-image: url('/assets/img/contact-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>CONTACT ME</h1>
+                        <span class="subheading">Have a feedback or opinion? I just love it...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as possible!</p>
+                <div class="my-5">
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- * * SB Forms Contact Form * *-->
+                    <!-- * * * * * * * * * * * * * * *-->
+                    <!-- This form is pre-integrated with SB Forms.-->
+                    <!-- To make this form functional, sign up at-->
+                    <!-- https://startbootstrap.com/solution/contact-forms-->
+                    <!-- to get an API token!-->
+                    <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/contact" method="post" autocomplete="off">
+                        <div class="form-group">
+                            <div class="form-floating">
+                                <input class="form-control" id="name" type="name" placeholder="Enter your name..." data-sb-validations="required"  name="userName" />
+                                <label for="name">Name</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <div class="form-floating">
+                                <input class="form-control" id="name" type="email" placeholder="Enter your email..." data-sb-validations="required"  name="userMail" />
+                                <label for="email">Email</label>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">Author name is required.</div>
+                            </div>
+                            <div class="form-floating">
+                                <textarea class="form-control" id="message" placeholder="Enter your message here..." style="height: 12rem" data-sb-validations="required"  name="userMessage"></textarea>
+                                <label for="message">Jot down here...✍🏻</label>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary text-uppercase" name="button" id="submitButton" type="submit">Publish</button>
+                    </form>
+                </div>
+                <hr class="my-4" />   
+            </div>
+        </div>
+    </div>
+</main>
+
 
 <%- include("partials/footer"); -%>

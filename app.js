@@ -32,6 +32,10 @@ async function insertNew(client, newItem){
   console.log(postsDB.insertedIds);
 }
 
+async function insertNewUser(client, newItem){
+  await client.db("blog").collection("reviews").insertOne(newItem);
+}
+
 async function deleteFromDB(client, postTitleToDel){
   var result = await client.db("blog").collection("posts").deleteOne({title:postTitleToDel});
   
@@ -54,7 +58,7 @@ app.use(express.urlencoded({extended:true}));
 
 app.set('view engine', 'ejs');
 
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 app.get("/",async function(req,res){
 
@@ -71,24 +75,39 @@ app.get("/contact",function(req,res){
   res.render("contact",{content:contactContent});
 });
 
+app.post("/contact", async function(req,res){
+  const newName = req.body.userName;
+  const newMail = req.body.userMail;
+  const newMessage = req.body.userMessage;
+  
+  await insertNewUser(client,{
+    name: newName,
+    mail: newMail,
+    message: newMessage
+  });
+  res.redirect("/");
+});
+
 app.get("/compose",function(req,res){
   res.render("compose");
 });
 
 app.post("/compose", async function(req,res){
   const newTitle = req.body.postTitle;
+  const newAuthor = req.body.author;
   const newBody = req.body.postBody;
   
   await insertNew(client,{
     title: newTitle,
-    body: newBody
+    body: newBody,
+    author: newAuthor
   });
   res.redirect("/");
 });
 
 // whenever we will open localhost:3000/postsDB/manish
 // manish will be printed in the console as postName will be manish
-app.get("/posts/:postId",function(req,res){
+app.get("/:postId",function(req,res){
   
   // console.log(req.params);
   const requestedId = _.lowerCase(req.params.postId);
@@ -99,7 +118,7 @@ app.get("/posts/:postId",function(req,res){
     // console.log(storedTitle);
     
     if(requestedId === storedId){
-      res.render("post",{title:postsDB[i].title, body:postsDB[i].body, id: postsDB[i]._id});
+      res.render("post",{title:postsDB[i].title, body:postsDB[i].body, id: postsDB[i]._id, author:postsDB[i].author});
     }
     
   }
