@@ -28,8 +28,8 @@ async function insertNew(client, newItem){
   await client.db("blog").collection("posts").insertOne(newItem);
   fetchAll(client);
 
-  console.log(`${postsDB.insertedCount} New listing created with the following id(s): `);
-  console.log(postsDB.insertedIds);
+  // console.log(`${postsDB.insertedCount} New listing created with the following id(s): `);
+  // console.log(postsDB.insertedIds);
 }
 
 async function insertNewUser(client, newItem){
