@@ -105,12 +105,12 @@ app.post("/compose", async function(req,res){
   res.redirect("/");
 });
 
-// whenever we will open localhost:3000/postsDB/manish
-// manish will be printed in the console as postName will be manish
+// 
 app.get("/:postId",async function(req,res){
   
   // console.log(req.params);
-  const requestedId = await _.lowerCase(req.params.postId);
+  const requestedId =  _.lowerCase(req.params.postId);
+  await fetchAll(client);
   
   // console.log(postsDB);
   for (let i = 0; i < postsDB.length; i++) {
