@@ -93,15 +93,17 @@ app.get("/compose",function(req,res){
 });
 
 app.post("/compose", async function(req,res){
-  const newTitle = req.body.postTitle;
-  const newAuthor = req.body.author;
-  const newBody = req.body.postBody;
-  
-  await insertNew(client,{
-    title: newTitle,
-    body: newBody,
-    author: newAuthor
-  });
+  if(req.body.key === "JSM2023"){
+    const newTitle = req.body.postTitle;
+    const newAuthor = req.body.author;
+    const newBody = req.body.postBody;
+    
+    await insertNew(client,{
+      title: newTitle,
+      body: newBody,
+      author: newAuthor
+    });
+  }
   res.redirect("/");
 });
 
