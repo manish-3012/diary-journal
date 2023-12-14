@@ -4,15 +4,31 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+
 async function main() {
-  try {
-    await client.connect();
-    await fetchAll(client);
-  } catch (e) {
-    console.error(e);
-  } finally {
-    // client.close()
+  const maxRetries = 5; // Set the maximum number of connection retries
+  let retryCount = 0;
+
+  while (retryCount < maxRetries) {
+    try {
+      await client.connect();
+      await fetchAll(client);
+      break; // If the connection is successful, break out of the loop
+    } catch (e) {
+      console.error(`Connection attempt ${retryCount + 1} failed:`, e);
+      retryCount++;
+
+      // Wait for a moment before retrying (adjust as needed)
+      await new Promise(resolve => setTimeout(resolve, 5000));
+    }
   }
+
+  if (retryCount === maxRetries) {
+    console.error('Max connection retries reached. Exiting application.');
+  } else {
+    console.log('Connected to MongoDB successfully.');
+  }
+
 }
 
 main().catch(console.error);
