@@ -1,0 +1,210 @@
+<!-- registration.ejs -->
+
+<%- include("partials/header"); -%>
+<header class="masthead" style="background-image: url('/assets/img/post-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>COMPOSE</h1>
+                    <span class="subheading">Let's jot something down today...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h1 class="mb-3">Registration</h1>
+                <form action="/registration" method="post">
+                    <!-- Number of Adults -->
+                    <div class="form-group">
+                        <label for="numAdults" class="">Number of Adults:</label>
+                        <input class="col-md-2" type="number" class="form-control" name="numAdults" id="numAdults" value="<%= numAdults %>" min="0">
+                    </div>
+                    
+                    <!-- Adult Details -->
+                    <div id="adultDetails">
+                        <!-- Rows for adults will be added here dynamically -->
+                    </div>
+
+                    <!-- Number of Yuvas -->
+                    <div class="form-group">
+                        <label for="numYuvas">Number of Yuvas:</label>
+                        <input class="col-md-2"  type="number" class="form-control" name="numYuvas" id="numYuvas" value="<%= numYuvas %>" min="0">
+                    </div>
+
+                    <!-- Yuva Details -->
+                    <div id="yuvaDetails">
+                        <!-- Rows for yuvas will be added here dynamically -->
+                    </div>
+
+                    <!-- Number of Children -->
+                    <div class="form-group">
+                        <label for="numBals">Number of Bal Shaktis:</label>
+                        <input class="col-md-2"  type="number" class="form-control" name="numBals" id="numBals" value="<%= numBals %>" min="0">
+                    </div>
+
+                    <!-- Child Details -->
+                    <div id="balDetails">
+                        <!-- Rows for children will be added here dynamically -->
+                    </div>
+
+                    <h3>Payer's Details</h3>
+                    <!-- Payer's Details -->
+                    <div id="payerDetails" class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="payerFirstName">First Name:</label>
+                            <input type="text" class="form-control" name="payerFirstName" id="payerFirstName" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerLastName">Last Name:</label>
+                            <input type="text" class="form-control" name="payerLastName" id="payerLastName" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerMobile">Mobile No.:</label>
+                            <input type="text" class="form-control" name="payerMobile" id="payerMobile" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerEmail">Email:</label>
+                            <input type="email" class="form-control" name="payerEmail" id="payerEmail" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerState">State:</label>
+                            <input type="text" class="form-control" name="payerState" id="payerState" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerDistrict">District:</label>
+                            <input type="text" class="form-control" name="payerDistrict" id="payerDistrict" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerPincode">Pincode:</label>
+                            <input type="text" class="form-control" name="payerPincode" id="payerPincode" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerPAN">PAN No.:</label>
+                            <input type="text" class="form-control" name="payerPAN" id="payerPAN" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="payerAADHAAR">AADHAAR No.:</label>
+                            <input type="text" class="form-control" name="payerAADHAAR" id="payerAADHAAR" required>
+                        </div>
+                    </div>
+
+                    <p id="totalAmount"></p>
+                    <input type="hidden" name="totalAmount" id="totalAmountInput" value="<%= totalAmount %>">
+
+                    <hr>
+                    <!-- Section for Seminar Dedication Amount -->
+                    <div class="mt-5">
+                        <h3>Payment Methods</h3>
+                        <ul>
+                            <li>1️⃣ QR Code (क्यू आर कोड)</li>
+                            <li>2️⃣ Bank Details (बेंक विवरण अनुसार)</li>
+                        </ul>
+                        <p>══━━━━✥◈✥━━━━══</p>
+                        <p>The amount can be transferred through RTGS and NEFT. Attach details of deposit (screenshot) after payment to complete the registration process. Please don't talk on mobile in this regard.</p>
+                        <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। स्‍थानान्‍तरण/हस्तांतरण के उपरांत बैज जारी करने के लिए जमा का विवरण (स्क्रीन शाट) को अटैच करना आवश्‍यक है। कृपया इस संबंध में मोबाइल पर बात न करे।</p>
+                        <p>🔴NOTE: - Take screenshot after the payment is complete.</p>
+                        <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="utrNumber">UTR Number:</label>
+                        <input type="text" class="form-control" name="utrNumber" id="utrNumber">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function addRows(category, count) {
+            for (let i = 1; i <= count; i++) {
+                let rowHtml = `
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="${category}Name${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Name:</label>
+                            <input type="text" class="form-control" name="${category}Name${i}" id="${category}Name${i}" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="${category}Aadhar${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Aadhar:</label>
+                            <input type="text" class="form-control" name="${category}Aadhar${i}" id="${category}Aadhar${i}" required>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="${category}Gender${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Gender:</label>
+                            <select class="form-control" name="${category}Gender${i}" id="${category}Gender${i}" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <!-- Add other gender options as needed -->
+                            </select>
+                        </div>
+                    </div>
+                `;
+                $(`#${category}Details`).append(rowHtml);
+            }
+        }
+
+        $("#numAdults").on("change", function () {
+            const count = parseInt($(this).val(), 10);
+            $("#adultDetails").empty();
+            addRows("adult", count);
+        });
+
+        $("#numYuvas").on("change", function () {
+            const count = parseInt($(this).val(), 10);
+            $("#yuvaDetails").empty();
+            addRows("yuva", count);
+        });
+
+        $("#numBals").on("change", function () {
+            const count = parseInt($(this).val(), 10);
+            $("#balDetails").empty();
+            addRows("bal", count);
+        });
+
+        function calculateTotalAmount() {
+            const adultPrice = 2300;
+            const yuvaPrice = 1800;
+            const balPrice = 1200;
+
+            const numAdults = parseInt($("#numAdults").val(), 10) || 0;
+            const numYuvas = parseInt($("#numYuvas").val(), 10) || 0;
+            const numBals = parseInt($("#numBals").val(), 10) || 0;
+
+            // Calculate total amount
+            const totalAmount = (numAdults * adultPrice) + (numYuvas * yuvaPrice) + (numBals * balPrice);
+
+            // Display total amount in the form or update the UI as needed
+            $("#totalAmount").text(`Total Amount: ${totalAmount} INR`);
+
+            // Set the value of the hidden input
+            $("#totalAmountInput").val(totalAmount);
+
+            // Enable or disable the submit button based on totalAmount
+            $("button[type='submit']").prop("disabled", !(totalAmount > 0));
+        }
+
+        // Disable submit button on page load
+        $("button[type='submit']").prop("disabled", true);
+
+        calculateTotalAmount();
+
+        // Add event listeners for number inputs
+        $("#numAdults, #numYuvas, #numBals").on("change", calculateTotalAmount);
+
+    });
+</script>
+<%- include("partials/footer"); -%>
