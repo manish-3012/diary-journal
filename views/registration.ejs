@@ -1,13 +1,13 @@
 <!-- registration.ejs -->
 
 <%- include("partials/header"); -%>
-<header class="masthead" style="background-image: url('/assets/img/post-bg.jpg')">
+<header class="masthead" style="background-image: url('/assets/img/maa_charan.jpg')">
     <div class="container position-relative px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>COMPOSE</h1>
-                    <span class="subheading">Let's jot something down today...</span>
+                    <!-- <h1>COMPOSE</h1>
+                    <span class="subheading">Let's jot something down today...</span> -->
                 </div>
             </div>
         </div>
@@ -18,7 +18,7 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <h1 class="mb-3">Registration</h1>
+                <h1 class="mb-3 text-center mb-md-3">Registration</h1>
                 <form action="/registration" method="post">
                     <!-- Number of Adults -->
                     <div class="form-group">
@@ -53,6 +53,7 @@
                         <!-- Rows for children will be added here dynamically -->
                     </div>
 
+                    <hr>
                     <h3>Payer's Details</h3>
                     <!-- Payer's Details -->
                     <div id="payerDetails" class="form-row">
@@ -85,27 +86,38 @@
                             <input type="text" class="form-control" name="payerPincode" id="payerPincode" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="payerPAN">PAN No.:</label>
+                            <label for="payerPAN">AADHAAR/PAN No.:</label>
                             <input type="text" class="form-control" name="payerPAN" id="payerPAN" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <!-- <div class="form-group col-md-4">
                             <label for="payerAADHAAR">AADHAAR No.:</label>
                             <input type="text" class="form-control" name="payerAADHAAR" id="payerAADHAAR" required>
-                        </div>
+                        </div> -->
                     </div>
 
                     <p id="totalAmount"></p>
                     <input type="hidden" name="totalAmount" id="totalAmountInput" value="<%= totalAmount %>">
-
+                    <p>Please check the filled details before proceeding to payment section.</p>
                     <hr>
                     <!-- Section for Seminar Dedication Amount -->
-                    <div class="mt-5">
-                        <h3>Payment Methods</h3>
+                    <div class="mt-3 mb-2">
+                        <h3  class="text-center">Payment Methods</h3>
                         <ul>
                             <li>1️⃣ QR Code (क्यू आर कोड)</li>
                             <li>2️⃣ Bank Details (बेंक विवरण अनुसार)</li>
                         </ul>
-                        <p>══━━━━✥◈✥━━━━══</p>
+                        <p class="text-center">══━━━━✥◈✥━━━━══</p>
+                        <h3 class="text-center">QR Code</h3>
+                        <img class="col-md-6 rounded mx-auto d-block" src="/assets/img/qr.png">
+                        <hr>
+                        <h3 class="text-center mt-3 mb-0">Bank Details</h3>
+                        <p class="fw-bold">A/C Name: H H Shri Mataji Nirmala Devi
+                            Sahaja Yoga Trust<br>
+                            Account Number : 5340025523<br>
+                            Bank: CENTRAL BANK OF INDIA, Linga,
+                            Dist. Chhindwara.<br>
+                            IFSC Code : CBIN0282129<br>
+                            BRANCH CODE: 2129</p>
                         <p>The amount can be transferred through RTGS and NEFT. Attach details of deposit (screenshot) after payment to complete the registration process. Please don't talk on mobile in this regard.</p>
                         <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। स्‍थानान्‍तरण/हस्तांतरण के उपरांत बैज जारी करने के लिए जमा का विवरण (स्क्रीन शाट) को अटैच करना आवश्‍यक है। कृपया इस संबंध में मोबाइल पर बात न करे।</p>
                         <p>🔴NOTE: - Take screenshot after the payment is complete.</p>
@@ -116,7 +128,7 @@
                         <label for="utrNumber">UTR Number:</label>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber">
                     </div>
-
+                    <h3 class="fw-bold">Please bring a print out of transaction as a payment proof!</h3>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -139,7 +151,7 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="${category}Aadhar${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Aadhar:</label>
+                            <label for="${category}Aadhar${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Aadhar/PAN:</label>
                             <input type="text" class="form-control" name="${category}Aadhar${i}" id="${category}Aadhar${i}" required>
                         </div>
 
