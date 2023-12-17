@@ -19,8 +19,18 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <h1 class="mb-3 text-center mb-md-3">Registration</h1>
+                <p class="fw-bold text-justify">
+                    Jai Shree Mataji! 🪷 Dear Family, in compliance with government regulations, we require the Government ID details of each individual attending the Pooja. Your understanding and cooperation in providing these details are greatly appreciated 💖</p>
                 <form action="/registration" method="post">
                     <!-- Number of Adults -->
+                    <div class="form-group">
+                        <label for="registrationType">Registration Type:</label>
+                        <select class="form-control" name="registrationType" id="registrationType" required>
+                            <option value="non-foreigner">Non-Foreigner</option>
+                            <option value="foreigner">Foreigner</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="numAdults" class="">Number of Adults:</label>
                         <input class="col-md-2" type="number" class="form-control" name="numAdults" id="numAdults" value="<%= numAdults %>" min="0">
@@ -120,15 +130,15 @@
                             BRANCH CODE: 2129</p>
                         <p>The amount can be transferred through RTGS and NEFT. Attach details of deposit (screenshot) after payment to complete the registration process. Please don't talk on mobile in this regard.</p>
                         <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। स्‍थानान्‍तरण/हस्तांतरण के उपरांत बैज जारी करने के लिए जमा का विवरण (स्क्रीन शाट) को अटैच करना आवश्‍यक है। कृपया इस संबंध में मोबाइल पर बात न करे।</p>
-                        <p>🔴NOTE: - Take screenshot after the payment is complete.</p>
-                        <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
+                        <p class="fw-bold">🔴NOTE: - Take screenshot after the payment is complete.</p>
+                        <p class="fw-bold">🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
                     </div>
                     
                     <div class="form-group">
                         <label for="utrNumber">UTR Number (In case of QR Payment):</label>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber">
                     </div>
-                    <h3 class="fw-bold fs-3">Please bring a print out of the transaction as a payment proof!</h3>
+                    <h3 class="fw-bold fs-4 mb-3">Please bring a print out of the transaction as a payment proof!</h3>
                     <button type="submit" class="btn btn-success custom-btn  rounded mx-auto d-block">Submit</button>
                 </form>
             </div>
@@ -188,16 +198,27 @@
         });
 
         function calculateTotalAmount() {
-            const adultPrice = 2300;
-            const yuvaPrice = 1800;
-            const balPrice = 1200;
+            const nonForeignerPrices = {
+                adult: 2300,
+                yuva: 1800,
+                bal: 1200
+            };
+
+            const foreignerPrices = {
+                adult: 5000,
+                yuva: 5000,
+                bal: 5000
+            };
+
+            const registrationType = $("#registrationType").val();
+            const prices = registrationType === "foreigner" ? foreignerPrices : nonForeignerPrices;
 
             const numAdults = parseInt($("#numAdults").val(), 10) || 0;
             const numYuvas = parseInt($("#numYuvas").val(), 10) || 0;
             const numBals = parseInt($("#numBals").val(), 10) || 0;
 
             // Calculate total amount
-            const totalAmount = (numAdults * adultPrice) + (numYuvas * yuvaPrice) + (numBals * balPrice);
+            const totalAmount = (numAdults * prices.adult) + (numYuvas * prices.yuva) + (numBals * prices.bal);
 
             // Display total amount in the form or update the UI as needed
             $("#totalAmount").text(`Total Amount to be paid: ${totalAmount} INR`);

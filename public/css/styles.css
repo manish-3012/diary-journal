@@ -11308,5 +11308,31 @@ header.masthead .site-heading .h1 {
   }
 }
 
+@media screen and (max-width: 720px) {
+  .hor {
+      width: 50%;
+  }
+  
+  .page{
+      max-width: 90vw !important;
+  }
 
+  .scrib{
+      display: flex;
+      justify-content: center;
+  }
+  
+  .scrib img{
+      width: 80%;
+      margin: auto;
+  }
+}
 
+.page{
+  max-width: 80vw;
+  border-radius: 20px;
+  margin: auto;
+  padding: 3vh 1vw 3vh 1vw;
+  background-color: #E3FEE1;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
