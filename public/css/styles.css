@@ -11335,14 +11335,17 @@ header.masthead .site-heading .h1 {
   padding: 3vh 1vw 3vh 1vw;
   /* background-color: #FA8072; */
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: #c3f8c9;
-background-image: linear-gradient(0deg, #c3f8c9 0%, #ffffff 50%, #ffb6b7 100%);
+  background-color: #eeffde;
+background-image: linear-gradient(0deg, #eeffde 0%, #ffffff 50%, #ffc6c7 100%);
+}
 
-
-
-  
-
-
-  
-
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/img/lotus.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 50%;
 }

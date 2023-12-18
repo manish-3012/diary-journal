@@ -147,10 +147,8 @@ app.post("/registration", async function (req, res) {
     firstName: req.body.payerFirstName,
     lastName: req.body.payerLastName,
     mobileNo: req.body.payerMobile,
-    email: req.body.payerEmail,
-    state: req.body.payerState,
     district: req.body.payerDistrict,
-    pincode: req.body.payerPincode,
+    state: req.body.payerState,
     panNo: req.body.payerPAN,
   };
   
