@@ -1,10 +1,17 @@
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const express = require("express");
+const ejs = require("ejs");
+
+const homeStartingContent = "Your home content goes here...";
+const scheduleContent = "Your schedule content goes here...";
+const contactContent = "Your contact content goes here...";
+const registrationContent = "Your registration content goes here...";
+
+const app = express();
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
   connectTimeoutMS: 30000,
   socketTimeoutMS: 30000,
@@ -23,22 +30,35 @@ async function main() {
     } catch (e) {
       console.error(`Connection attempt ${retryCount + 1} failed:`, e);
       retryCount++;
+      const delay = Math.pow(2, retryCount) * 1000;
 
       // Wait for a moment before retrying (adjust as needed)
-      await new Promise(resolve => setTimeout(resolve, 5000));
+      await new Promise(resolve => setTimeout(resolve, delay));
     }
   }
 
   if (retryCount === maxRetries) {
     console.error('Max connection retries reached. Exiting application.');
+    process.exit(1);
   } else {
     console.log('Connected to MongoDB successfully.');
   }
 
 }
 
-main().catch(console.error);
+process.on('exit', () => {
+  if (client.isConnected()) {
+    console.log('Closing MongoDB connection...');
+    client.close();
+  }
+});
 
+main().then(() => {
+  // Start your Express server or any other application logic
+  app.listen(3000, function () {
+    console.log("Server started on port 3000");
+  });
+}).catch(console.error);
 
 async function insertNewRegex(client, newItem){
   await client.db("blog").collection("registration").insertOne(newItem);
@@ -47,19 +67,6 @@ async function insertNewRegex(client, newItem){
 async function insertNewPayex(client, newItem){
   await client.db("blog").collection("payerDetails").insertOne(newItem);
 }
-
-const express = require("express");
-const ejs = require("ejs");
-
-// to import the lodash module
-const _ = require("lodash");
-
-const homeStartingContent = "Your home content goes here...";
-const scheduleContent = "Your schedule content goes here...";
-const contactContent = "Your contact content goes here...";
-const registrationContent = "Your registration content goes here...";
-
-const app = express();
 
 app.use(express.static(__dirname + "/public"));
 
@@ -71,7 +78,7 @@ app.use(express.static(__dirname + "/public"));
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).send('Something went wrong!');
+  res.status(500).send('Something went wrong! Please retry or contact technical team.');
 });
 
 app.get("/",async function(req,res){
@@ -179,14 +186,15 @@ app.post("/registration", async function (req, res) {
     res.render("confirmation", { urn });
   } catch (error) {
     console.error(error);
+    console.error(error.stack);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 
-app.listen(3000, function() {
-    console.log("Server started on port 3000");
-});
+// app.listen(3000, function() {
+//     console.log("Server started on port 3000");
+// });
 
 function generateurn() {
   // Generate a random number or string (you can adjust the length as needed)
