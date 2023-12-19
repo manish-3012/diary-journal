@@ -157,26 +157,26 @@ app.post("/registration", async function (req, res) {
   // console.log(req.body);
   
   try {
-    let uniqueEnrollmentNumber = generateUniqueEnrollmentNumber();
+    let urn = generateurn();
     
     await insertNewRegex(client, {
       adults: adultDetails,
       yuvas: yuvaDetails,
       bals: balDetails,
       payerDetails: payerDetails,
-      uniqueEnrollmentNumber: uniqueEnrollmentNumber,
+      urn: urn,
       utrNumber:req.body.utrNumber,
       totalAmount:req.body.totalAmount
     });
 
     await insertNewPayex(client, {
       payerDetails: payerDetails,
-      uniqueEnrollmentNumber: uniqueEnrollmentNumber,
+      urn: urn,
       utrNumber:req.body.utrNumber,
       totalAmount:req.body.totalAmount
     });
 
-    res.render("confirmation", { uniqueEnrollmentNumber });
+    res.render("confirmation", { urn });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -188,7 +188,7 @@ app.listen(3000, function() {
     console.log("Server started on port 3000");
 });
 
-function generateUniqueEnrollmentNumber() {
+function generateurn() {
   // Generate a random number or string (you can adjust the length as needed)
   const randomPart = Math.floor(Math.random() * 100000);
 
