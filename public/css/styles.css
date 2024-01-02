@@ -11335,17 +11335,60 @@ header.masthead .site-heading .h1 {
   padding: 3vh 1vw 3vh 1vw;
   /* background-color: #FA8072; */
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: #eeffde;
-background-image: linear-gradient(0deg, #eeffde 0%, #ffffff 50%, #ffc6c7 100%);
+  background-color: #FCE3E3;
+/* background-image: linear-gradient(0deg, #eeffde 0%, #ffffff 50%, #ffc6c7 100%); */
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-image: url('../assets/img/lotus.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: 50%;
+.language-toggle {
+  display: inline-block;
+  margin-left: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #333; /* Adjust color as needed */
+  position: relative;
+  font-size: 18px; /* Adjust font size as needed */
+  padding-bottom: 5px; /* Adjust padding as needed */
+  transition: color 0.3s ease, padding-bottom 0.3s ease;
+}
+
+.language-toggle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Adjust spacing as needed */
+  width: 100%;
+  height: 2px; /* Adjust thickness as needed */
+  background-color: transparent; /* Initial color */
+  transition: background-color 0.3s ease;
+}
+
+.language-toggle.selected,
+.language-toggle:hover {
+  color: #FF5733; /* Adjust hover color as needed */
+  padding-bottom: 8px; /* Adjust hover padding as needed */
+}
+
+.language-toggle.selected::after,
+.language-toggle:hover::after {
+  background-color: #FF5733 !important; /* Adjust hover color as needed */
+}
+
+#hindiContent {
+  font-family: 'Tiro Devanagari Hindi', serif;
+}
+
+#hindiContent h1,
+#hindiContent h2,
+#hindiContent h3,
+#hindiContent h4,
+#hindiContent h5,
+#hindiContent h6,
+#hindiContent p,
+#hindiContent span {
+  font-family: 'Tiro Devanagari Hindi', serif;
+}
+
+.hindi{
+  font-family: 'Tiro Devanagari Hindi', serif;
+
 }

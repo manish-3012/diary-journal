@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
+
+<head>
+    <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -15,30 +16,83 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Ballet:opsz@16..72&family=Lora:ital@1&family=Mr+Dafoe&family=Playfair+Display&family=Raleway:wght@600&display=swap" rel="stylesheet">  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Ballet:opsz@16..72&family=Lora:ital@1&family=Playfair+Display&family=Raleway:wght@600&display=swap" rel="stylesheet">  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Ballet:opsz@16..72&family=Caveat&family=Playfair+Display&family=Raleway:wght@600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 
         <!-- Core theme CSS (includes Bootstrap)-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="/css/styles.css" rel="stylesheet" />
-    </head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- jQuery for handling language toggle -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Set default language to English
+            var currentLanguage = 'en';
+
+            // Function to change language
+            function changeLanguage(language) {
+                // You can replace this with actual translations
+                var translations = {
+                    'en': {
+                        'home': 'Home',
+                        'schedule': 'Schedule',
+                        'chhindwara': 'Chhindwara',
+                        'contacts': 'Contacts',
+                        'registration': 'Registration'
+                    },
+                    'hi': {
+                        'home': 'होम',
+                        'schedule': 'अनुसूची',
+                        'chhindwara': 'छिंदवाड़ा',
+                        'contacts': 'संपर्क',
+                        'registration': 'पंजीकरण'
+                    }
+                    // Add more translations as needed
+                };
+
+                // Change navbar text
+                $('li.nav-item:eq(0) a').text(translations[language]['home']);
+                $('li.nav-item:eq(1) a').text(translations[language]['schedule']);
+                $('li.nav-item:eq(2) a').text(translations[language]['chhindwara']);
+                $('li.nav-item:eq(3) a').text(translations[language]['contacts']);
+                $('li.nav-item:eq(4) a').text(translations[language]['registration']);
+
+                // Update the current language
+                currentLanguage = language;
+            }
+
+            // Event listener for language change
+            $('.language-toggle').on('click', function () {
+                var selectedLanguage = $(this).data('language');
+                changeLanguage(selectedLanguage);
+            });
+        });
+    </script>
+</head>
+
 <body>
-    <!-- Navigation-->
+    <!-- Navigation with language toggle -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="/">SAHAJAYOGA</a>
+            <!-- <a class="navbar-brand" href="/">SAHAJAYOGA</a> -->
+            <span class="language-toggle selected navbar-brand" data-language="en" >ENG</span>
+            <span class="language-toggle navbar-brand hindi" data-language="hi" >हिन्दी</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="schedule">Schedule</a></li>
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="chhindwara">Chhindwara</a></li>
-                    <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="compose">Chhindwara</a></li> -->
-                    <!-- <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="compose">FAQs</a></li> -->
-                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact">Contacts</a></li>
-                    <li class="nav-item"><a class="btn-success text-white btn rounded-3 nav-link px-lg-3 py-3 py-lg-4" href="registration">Registration</a></li>
+                    <li class="nav-item"><a class="hindi nav-link px-lg-3 py-3 py-lg-4" href="/">Home</a></li>
+                    <li class="nav-item"><a class="hindi nav-link px-lg-3 py-3 py-lg-4" href="schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="hindi nav-link px-lg-3 py-3 py-lg-4" href="chhindwara">Chhindwara</a></li>
+                    <li class="nav-item"><a class="hindi nav-link px-lg-3 py-3 py-lg-4" href="contact">Contacts</a></li>
+                    <li class="nav-item"><a class="hindi btn-success text-white btn rounded-3 nav-link px-lg-3 py-3 py-lg-4" href="registration">Registration</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+</body>
+
+</html>

@@ -15,5 +15,47 @@
 
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+
+<!-- Include this script in your HTML files -->
+<script>
+    function toggleLanguage(language) {
+        const englishContent = document.querySelector('#englishContent');
+        const hindiContent = document.querySelector('#hindiContent');
+  
+        const englishToggle = document.querySelector('.language-toggle[data-language="en"]');
+        const hindiToggle = document.querySelector('.language-toggle[data-language="hi"]');
+  
+        if (language === 'en') {
+            englishContent.style.display = 'block';
+            hindiContent.style.display = 'none';
+            englishToggle.classList.add('selected');
+            hindiToggle.classList.remove('selected');
+        } else if (language === 'hi') {
+            englishContent.style.display = 'none';
+            hindiContent.style.display = 'block';
+            englishToggle.classList.remove('selected');
+            hindiToggle.classList.add('selected');
+        }
+  
+        // Store the selected language in local storage
+        localStorage.setItem('selectedLanguage', language);
+    }
+  
+    // Retrieve the selected language from local storage
+    const storedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Initial setup to show the stored language content
+    toggleLanguage(storedLanguage);
+  
+    // Event listener for language toggle
+    document.querySelectorAll('.language-toggle').forEach((toggle) => {
+        toggle.addEventListener('click', (event) => {
+            const selectedLanguage = event.target.dataset.language;
+            toggleLanguage(selectedLanguage);
+        });
+    });
+</script>
+
+  
 </body>
 </html>
