@@ -165,6 +165,7 @@ app.post("/registration", async function (req, res) {
   
   try {
     let urn = generateurn();
+    const totalAmount = parseInt(req.body.totalAmount, 10)
     
     await insertNewRegex(client, {
       adults: adultDetails,
@@ -173,14 +174,15 @@ app.post("/registration", async function (req, res) {
       payerDetails: payerDetails,
       urn: urn,
       utrNumber:req.body.utrNumber,
-      totalAmount:req.body.totalAmount
+      totalAmount:totalAmount
     });
 
     await insertNewPayex(client, {
       payerDetails: payerDetails,
       urn: urn,
       utrNumber:req.body.utrNumber,
-      totalAmount:req.body.totalAmount
+      totalAmount:totalAmount,
+      amountReceived:0
     });
 
     res.render("confirmation", { urn });
