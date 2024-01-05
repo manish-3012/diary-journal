@@ -11392,3 +11392,9 @@ header.masthead .site-heading .h1 {
   font-family: 'Tiro Devanagari Hindi', serif;
 
 }
+
+.schedule {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px; /* Adjust the gap as needed */
+}
