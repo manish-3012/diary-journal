@@ -19,9 +19,9 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <h1 class="mb-3 text-center mb-md-3">Registration</h1>
-                <p class="text-center">Jai Shree Mataji! 🪷</p>
+                <p class="text-center">Jai Shri Mataji! 🪷</p>
                 <p class="text-justify fw-bold">
-                    Dear Family, government regulations require Government ID details for Pooja attendees. Your cooperation mean the world to us. 💖</p>
+                    Dear Family, government regulations require Government ID details for Puja attendees. Your cooperation mean the world to us. 💖</p>
                 <form action="/registration" method="post">
                     <!-- Number of Adults -->
                     <div class="form-group">
@@ -123,12 +123,14 @@
                             BRANCH CODE: 2129</p>
                         <!-- <p>The amount can be transferred through RTGS and NEFT. Please insert UTR Number after payment, to complete the registration process.</p>
                         <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। पंजीकरण प्रक्रिया को पूरा करने के लिए कृपया भुगतान के बाद UTR नंबर डालें।</p> -->
-                        <p class="fw-bold">🔴NOTE: - Take screenshot after the payment is complete.</p>
-                        <p class="fw-bold">🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
+                        <p >🔴NOTE: - Take screenshot after the payment is complete.</p>
+                        <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
                     </div>
                     
                     <div class="form-group">
-                        <label for="utrNumber">UTR Number:<span class="text-danger fw-bold">*</span></label>
+                        <label for="utrNumber" class="fw-bold">UTR Number/UPI Number:<span class="text-danger fw-bold">*</span></label>
+                        <p class="mt-0 mb-3">(In case of multiple numbers put <span class="fw-bold">' , '</span> to separate them.<br>For example, <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
+                        <p class="mt-0 mb-2 hindi">(यदि कई संख्याएँ हैं तो उन्हें <span class="fw-bold">' , '</span> से अलग करें।<br>उदाहरण के लिए, <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber" required>
                     </div>
                     <h3 class="fw-bold fs-5 text-center text-primary mb-3">Please bring a print out of the transaction as a payment proof!</h3>
