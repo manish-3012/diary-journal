@@ -179,6 +179,9 @@ app.post("/registration", async function (req, res) {
 
     await insertNewPayex(client, {
       payerDetails: payerDetails,
+      adults: numAdults,
+      yuvas: numYuvas,
+      bals: numBals,
       urn: urn,
       utrNumber:req.body.utrNumber,
       totalAmount:totalAmount,
