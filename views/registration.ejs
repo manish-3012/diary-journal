@@ -21,7 +21,7 @@
                 <h1 class="mb-3 text-center mb-md-3">Registration</h1>
                 <p class="text-center mt-0 mb-2">Jai Shri Mataji! 🪷</p>
                 <p class="text-justify fw-bold mt-0">
-                    Dear Family, government regulations require Government ID details for Puja attendees. Your cooperation mean the world to us. 💖<br><span class="text-success">(For Foreigners please fill Passport No. in place of Aadhar)</span></p>
+                    Dear Family, government regulations require Government ID details for Puja attendees. Your cooperation mean the world to us. 💖<br><span class="text-success">(For foreigners please fill Passport No. in place of Aadhar)</span></p>
                 <form action="/registration" method="post">
                     <!-- Number of Adults -->
                     <div class="form-group">
@@ -98,9 +98,9 @@
                         </div> -->
                     </div>
 
-                    <p id="totalAmount" class="fw-bold fs-3"></p>
+                    <p id="totalAmount" class="fw-bold fs-3 mt-2 mb-0"></p>
                     <input type="hidden" name="totalAmount" id="totalAmountInput" value="<%= totalAmount %>">
-                    <p>Please check the filled details properly before proceeding to the payment section.</p>
+                    <p class="mt-2">Please check the filled details properly before proceeding to the payment section.</p>
                     <hr>
                     <!-- Section for Seminar Dedication Amount -->
                     <div class="mt-3 mb-2">
@@ -109,31 +109,33 @@
                             <li>1️⃣ QR Code (क्यू आर कोड)</li>
                             <li>2️⃣ Bank Details (बेंक विवरण अनुसार)</li>
                         </ul>
-                        <p class="text-center">══━━━━✥◈✥━━━━══</p>
+                        <p class="text-center mb-0">══━━━━✥◈✥━━━━══</p>
                         <h3 class="text-center">1️⃣ QR Code</h3>
                         <img class="col-md-6 rounded mx-auto d-block" src="/assets/img/qr.png">
                         <hr>
                         <h3 class="text-center mt-3 mb-0">2️⃣ Bank Details</h3>
-                        <p class="fw-bold">A/C Name: H H Shri Mataji Nirmala Devi
+                        <p class="fw-bold mb-0">A/C Name: H H Shri Mataji Nirmala Devi
                             Sahaja Yoga Trust<br>
                             Account Number : 5340025523<br>
                             Bank: CENTRAL BANK OF INDIA, Linga,
                             Dist. Chhindwara.<br>
                             IFSC Code : CBIN0282129<br>
-                            BRANCH CODE: 2129</p>
-                        <!-- <p>The amount can be transferred through RTGS and NEFT. Please insert UTR Number after payment, to complete the registration process.</p>
-                        <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। पंजीकरण प्रक्रिया को पूरा करने के लिए कृपया भुगतान के बाद UTR नंबर डालें।</p> -->
-                        <p >🔴NOTE: - Take screenshot after the payment is complete.</p>
-                        <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p>
+                            BRANCH CODE: 2129
+                        </p>
+                            <!-- <p>The amount can be transferred through RTGS and NEFT. Please insert UTR Number after payment, to complete the registration process.</p>
+                                <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। पंजीकरण प्रक्रिया को पूरा करने के लिए कृपया भुगतान के बाद UTR नंबर डालें।</p> -->
+                                <!-- <p >🔴NOTE: - Take screenshot after the payment is complete.</p>
+                                    <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p> -->
+                        <p class=" mt-0 text-center">══━━━━✥◈✥━━━━══</p>
                     </div>
                     
                     <div class="form-group">
                         <label for="utrNumber" class="fw-bold">UTR Number/UPI Number:<span class="text-danger fw-bold">*</span></label>
-                        <p class="mt-0 mb-3">(In case of multiple numbers put <span class="fw-bold">' , '</span> to separate them.<br>For example, <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
-                        <p class="mt-0 mb-2 hindi">(यदि कई संख्याएँ हैं तो उन्हें <span class="fw-bold">' , '</span> से अलग करें।<br>उदाहरण के लिए, <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
+                        <p class="mt-0 mb-3">(In case of multiple numbers put <span class="fw-bold">' , '</span> to separate them.<br>For example: <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
+                        <p class="mt-0 mb-2 hindi">(यदि कई संख्याएँ हैं तो उन्हें <span class="fw-bold">' , '</span> से अलग करें।<br>उदाहरण के लिए: <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber" required>
                     </div>
-                    <h3 class="fw-bold fs-5 text-center text-success mb-3">Please bring a print out of the transaction as a payment proof!</h3>
+                    <!-- <h3 class="fw-bold fs-5 text-center text-success mb-3">Please bring a print out of the transaction as a payment proof!</h3> -->
                     <button type="submit" class="btn btn-success custom-btn  rounded mx-auto d-block">Submit</button>
                 </form>
             </div>
