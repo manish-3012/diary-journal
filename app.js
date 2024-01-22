@@ -60,142 +60,174 @@ main().then(() => {
   });
 }).catch(console.error);
 
-async function insertNewRegex(client, newItem){
-  await client.db("blog").collection("registration").insertOne(newItem);
-}
+import('emailjs').then((emailjsModule) => {
+  const { SMTPClient } = emailjsModule;
 
-async function insertNewPayex(client, newItem){
-  await client.db("blog").collection("payerDetails").insertOne(newItem);
-}
-
-app.use(express.static(__dirname + "/public"));
-
-app.use(express.urlencoded({extended:true}));
-
-app.set('view engine', 'ejs');
-
-app.use(express.static(__dirname + "/public"));
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong! Please retry or contact technical team.');
-});
-
-app.get("/",async function(req,res){
-  
-  res.render("home",{content:homeStartingContent});
-});
-
-app.get("/schedule",function(req,res){
-  res.render("schedule",{content:scheduleContent});
-});
-
-app.get("/chhindwara",function(req,res){
-  res.render("chhindwara",{content:scheduleContent});
-});
-
-app.get("/contact",function(req,res){
-  res.render("contact",{content:contactContent});
-});
-
-app.get("/confirmation", function (req, res) {
-  // You can render the confirmation view without any dynamic data if needed
-  res.render("confirmation");
-});
-
-// Assuming you have a route like this in your app.js or index.js
-app.get("/registration", function (req, res) {
-  // You can set default values or calculate them based on your logic
-  const numAdults = 0; // Replace with your actual value or calculation
-  const numBals = 0; // Replace with your actual value or calculation
-  const numYuvas = 0; // Replace with your actual value or calculation
-  const totalAmount = 0; // totalAmount to be paid
-
-  res.render("registration", { content: registrationContent, numAdults, numYuvas, numBals, totalAmount });
-});
-
-app.post("/registration", async function (req, res) {
-  const numAdults = parseInt(req.body.numAdults, 10);
-  const numYuvas = parseInt(req.body.numYuvas, 10);
-  const numBals = parseInt(req.body.numBals, 10);
-
-  const yuvaDetails = [];
-  const adultDetails = [];
-  const balDetails = [];
-
-  // Loop through and save yuva details
-  for (let i = 1; i <= numYuvas; i++) {
-    const yuvaName = req.body[`yuvaName${i}`];
-    const yuvaAadhar = req.body[`yuvaAadhar${i}`];
-    const yuvaGender = req.body[`yuvaGender${i}`];
-
-    yuvaDetails.push({ name: yuvaName, aadharNo: yuvaAadhar, gender: yuvaGender });
-  }
-
-  // Loop through and save adult details
-  for (let i = 1; i <= numAdults; i++) {
-    const adultName = req.body[`adultName${i}`];
-    const adultAadhar = req.body[`adultAadhar${i}`];
-    const adultGender = req.body[`adultGender${i}`];
-
-    adultDetails.push({ name: adultName, aadharNo: adultAadhar, gender: adultGender });
-  }
-
-  // Loop through and save bal details
-  for (let i = 1; i <= numBals; i++) {
-    const balName = req.body[`balName${i}`];
-    const balAadhar = req.body[`balAadhar${i}`];
-    const balGender = req.body[`balGender${i}`];
-
-    balDetails.push({ name: balName, aadharNo: balAadhar, gender: balGender });
-  }
-
-  let payerDetails = {
-    firstName: req.body.payerFirstName,
-    lastName: req.body.payerLastName,
-    mobileNo: req.body.payerMobile,
-    district: req.body.payerDistrict,
-    state: req.body.payerState,
-    panNo: req.body.payerPAN,
+  const emailConfig = {
+    user: 'sahum6703@gmail.com',
+    password: 'eauyhlesebihgqxk',
+    host: 'smtp.gmail.com',
+    ssl: true,
   };
-  
-  // console.log(payerDetails);
 
-  // console.log(req.body);
-  
-  try {
-    let urn = generateurn();
-    const totalAmount = parseInt(req.body.totalAmount, 10)
-    
-    await insertNewRegex(client, {
-      adults: adultDetails,
-      yuvas: yuvaDetails,
-      bals: balDetails,
-      payerDetails: payerDetails,
-      urn: urn,
-      utrNumber:req.body.utrNumber,
-      totalAmount:totalAmount,
-      arrivalDate: req.body.arrivalDate,  
-      arrivalTime: req.body.arrivalTime  
-    });
+  const emailClient = new SMTPClient(emailConfig);
 
-    await insertNewPayex(client, {
-      payerDetails: payerDetails,
-      adults: numAdults,
-      yuvas: numYuvas,
-      bals: numBals,
-      urn: urn,
-      utrNumber:req.body.utrNumber,
-      totalAmount:totalAmount,
-      amountReceived:0
-    });
-
-    res.render("confirmation", { urn });
-  } catch (error) {
-    console.error(error);
-    console.error(error.stack);
-    res.status(500).json({ error: 'Internal Server Error' });
+  async function sendEmail(urn, userEmail,name) {
+    try {
+      console.log('Sending email...');
+      const message = await emailClient.sendAsync({
+        text: `Jai Shri Mataji🙏🏻💝 Thank you for completing the registration process. We look forward to celebrating the 101st Birthday Puja of our most beloved mother. Your URN is: ${urn}`,
+        from: 'Registration Team <sahum6703@gmail.com>',
+        to: `${userEmail} <${userEmail}>`,
+        cc: 'else <mpyuvashakti@gmail.com>',
+        subject: 'Registration Confirmation - Testing emailjs',
+      });
+      console.log('Email sent:', message);
+    } catch (err) {
+      console.error('Error sending email:', err);
+    }
   }
+
+  async function insertNewRegex(client, newItem){
+    await client.db("blog").collection("registration").insertOne(newItem);
+  }
+
+  async function insertNewPayex(client, newItem){
+    await client.db("blog").collection("payerDetails").insertOne(newItem);
+  }
+
+  app.use(express.static(__dirname + "/public"));
+
+  app.use(express.urlencoded({extended:true}));
+
+  app.set('view engine', 'ejs');
+
+  app.use(express.static(__dirname + "/public"));
+
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong! Please retry or contact technical team.');
+  });
+
+  app.get("/",async function(req,res){
+    
+    res.render("home",{content:homeStartingContent});
+  });
+
+  app.get("/schedule",function(req,res){
+    res.render("schedule",{content:scheduleContent});
+  });
+
+  app.get("/chhindwara",function(req,res){
+    res.render("chhindwara",{content:scheduleContent});
+  });
+
+  app.get("/contact",function(req,res){
+    res.render("contact",{content:contactContent});
+  });
+
+  app.get("/confirmation", function (req, res) {
+    // You can render the confirmation view without any dynamic data if needed
+    res.render("confirmation");
+  });
+
+  // Assuming you have a route like this in your app.js or index.js
+  app.get("/registration", function (req, res) {
+    // You can set default values or calculate them based on your logic
+    const numAdults = 0; // Replace with your actual value or calculation
+    const numBals = 0; // Replace with your actual value or calculation
+    const numYuvas = 0; // Replace with your actual value or calculation
+    const totalAmount = 0; // totalAmount to be paid
+
+    res.render("registration", { content: registrationContent, numAdults, numYuvas, numBals, totalAmount });
+  });
+
+  app.post("/registration", async function (req, res) {
+    const numAdults = parseInt(req.body.numAdults, 10);
+    const numYuvas = parseInt(req.body.numYuvas, 10);
+    const numBals = parseInt(req.body.numBals, 10);
+
+    const yuvaDetails = [];
+    const adultDetails = [];
+    const balDetails = [];
+
+    // Loop through and save yuva details
+    for (let i = 1; i <= numYuvas; i++) {
+      const yuvaName = req.body[`yuvaName${i}`];
+      const yuvaAadhar = req.body[`yuvaAadhar${i}`];
+      const yuvaGender = req.body[`yuvaGender${i}`];
+
+      yuvaDetails.push({ name: yuvaName, aadharNo: yuvaAadhar, gender: yuvaGender });
+    }
+
+    // Loop through and save adult details
+    for (let i = 1; i <= numAdults; i++) {
+      const adultName = req.body[`adultName${i}`];
+      const adultAadhar = req.body[`adultAadhar${i}`];
+      const adultGender = req.body[`adultGender${i}`];
+
+      adultDetails.push({ name: adultName, aadharNo: adultAadhar, gender: adultGender });
+    }
+
+    // Loop through and save bal details
+    for (let i = 1; i <= numBals; i++) {
+      const balName = req.body[`balName${i}`];
+      const balAadhar = req.body[`balAadhar${i}`];
+      const balGender = req.body[`balGender${i}`];
+
+      balDetails.push({ name: balName, aadharNo: balAadhar, gender: balGender });
+    }
+    
+    let payerDetails = {
+      firstName: req.body.payerFirstName,
+      email: req.body.payerEmail,
+      mobileNo: req.body.payerMobile,
+      district: req.body.payerDistrict,
+      state: req.body.payerState,
+      panNo: req.body.payerPAN,
+    };
+    const payerEmail = payerDetails.email;
+    
+    // console.log(payerDetails);
+
+    // console.log(req.body);
+    
+    try {
+      let urn = generateurn();
+      const totalAmount = parseInt(req.body.totalAmount, 10)
+      
+      await insertNewRegex(client, {
+        adults: adultDetails,
+        yuvas: yuvaDetails,
+        bals: balDetails,
+        payerDetails: payerDetails,
+        urn: urn,
+        utrNumber:req.body.utrNumber,
+        totalAmount:totalAmount,
+        arrivalDate: req.body.arrivalDate,  
+        arrivalTime: req.body.arrivalTime  
+      });
+
+      await insertNewPayex(client, {
+        payerDetails: payerDetails,
+        adults: numAdults,
+        yuvas: numYuvas,
+        bals: numBals,
+        urn: urn,
+        utrNumber:req.body.utrNumber,
+        totalAmount:totalAmount,
+        amountReceived:0
+      });
+      await sendEmail(urn, payerEmail);
+      res.render("confirmation", { urn });
+    } catch (error) {
+      console.error(error);
+      console.error(error.stack);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+}).catch((error) => {
+  console.error('Error importing emailjs:', error);
 });
 
 
