@@ -174,7 +174,9 @@ app.post("/registration", async function (req, res) {
       payerDetails: payerDetails,
       urn: urn,
       utrNumber:req.body.utrNumber,
-      totalAmount:totalAmount
+      totalAmount:totalAmount,
+      arrivalDate: req.body.arrivalDate,  
+      arrivalTime: req.body.arrivalTime  
     });
 
     await insertNewPayex(client, {

@@ -135,6 +135,23 @@
                         <p class="mt-0 mb-2 hindi">(यदि कई संख्याएँ हैं तो उन्हें <span class="fw-bold">' , '</span> से अलग करें।<br>उदाहरण के लिए: <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber" required>
                     </div>
+                    <hr>
+                    <h3 class="text-center">Transportation Facility</h3>
+                    <p class="text-justify fw-bold mt-0 mb-2">In case if you require transportation services from Nagpur to Chhindwara, please inform us of your arrival date and time.</p>
+                    <p class="text-justify fw-bold mt-0 hindi">
+                        अगर आप नागपुर से छिंदवाड़ा के लिए परिवहन सुविधा का उपयोग करना चाहते हैं तो कृपया अपने आगमन का समय और तिथि हमें सूचित करें।</p>
+                        <!-- Arrival Date and Time -->
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="arrivalDate" class="fw-bold">Arrival Date:</label>
+                            <input type="date" class="form-control" name="arrivalDate" id="arrivalDate" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="arrivalTime" class="fw-bold">Arrival Time:</label>
+                            <input type="time" class="form-control" name="arrivalTime" id="arrivalTime" >
+                        </div>
+                    </div>
+
                     <!-- <h3 class="fw-bold fs-5 text-center text-success mb-3">Please bring a print out of the transaction as a payment proof!</h3> -->
                     <button type="submit" class="btn btn-success custom-btn  rounded mx-auto d-block">Submit</button>
                 </form>
