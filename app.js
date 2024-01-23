@@ -64,25 +64,31 @@ import('emailjs').then((emailjsModule) => {
   const { SMTPClient } = emailjsModule;
 
   const emailConfig = {
-    user: 'sahum6703@gmail.com',
-    password: 'eauyhlesebihgqxk',
+    user: 'chhindwarabirthdaypuja@gmail.com',
+    password: 'yohzvqbvfdntikvk',
     host: 'smtp.gmail.com',
     ssl: true,
   };
 
   const emailClient = new SMTPClient(emailConfig);
 
-  async function sendEmail(urn, userEmail,name) {
+  async function sendEmail(urn, userEmail,userName) {
     try {
-      console.log('Sending email...');
-      const message = await emailClient.sendAsync({
-        text: `Jai Shri Mataji🙏🏻💝 Thank you for completing the registration process. We look forward to celebrating the 101st Birthday Puja of our most beloved mother. Your URN is: ${urn}`,
-        from: 'Registration Team <sahum6703@gmail.com>',
-        to: `${userEmail} <${userEmail}>`,
-        cc: 'else <mpyuvashakti@gmail.com>',
-        subject: 'Registration Confirmation - Testing emailjs',
-      });
-      console.log('Email sent:', message);
+      const message = {
+        from: 'Registration Team <chhindwarabirthdaypuja@gmail.com>',
+        to: `${userName} <${userEmail}>`,
+        cc: 'else <sahum6703@gmail.com>',
+        subject: 'Registration Confirmation - 101st Birthday Puja',
+        attachment: [
+          { data: `<html>Jai Shri Mataji ${userName}🙏🏻💝,<br><br>
+              Thank you for completing the registration process. We are delighted to inform you that your registration for the 101st Birthday Puja has been successful.😄<br><br>
+              Your Unique Registration Number (URN) is: <strong>${urn}</strong>.<br><br>
+              We look forward to celebrating this auspicious occasion with you.<br><br>
+              Best Regards,<br>
+              The Registration Team 💝</html>`, alternative: true }
+        ]
+      };
+      await emailClient.sendAsync(message);
     } catch (err) {
       console.error('Error sending email:', err);
     }
@@ -187,6 +193,7 @@ import('emailjs').then((emailjsModule) => {
       panNo: req.body.payerPAN,
     };
     const payerEmail = payerDetails.email;
+    const payerName = payerDetails.firstName;
     
     // console.log(payerDetails);
 
@@ -218,7 +225,9 @@ import('emailjs').then((emailjsModule) => {
         totalAmount:totalAmount,
         amountReceived:0
       });
-      await sendEmail(urn, payerEmail);
+      if (payerEmail) {
+        await sendEmail(urn, payerEmail, payerName);
+      }
       res.render("confirmation", { urn });
     } catch (error) {
       console.error(error);
