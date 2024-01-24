@@ -80,12 +80,15 @@ import('emailjs').then((emailjsModule) => {
         cc: 'else <sahum6703@gmail.com>',
         subject: 'Registration Confirmation - 101st Birthday Puja',
         attachment: [
-          { data: `<html>Jai Shri Mataji ${userName}🙏🏻💝,<br><br>
+          { data: `<html>
+              <strong>Dear ${userName}</strong>,<br>
+              Jai Shri Mataji 🙏🏻💝<br><br>
               Thank you for completing the registration process. We are delighted to inform you that your registration for the 101st Birthday Puja has been successful.😄<br><br>
               Your Unique Registration Number (URN) is: <strong>${urn}</strong>.<br><br>
-              We look forward to celebrating this auspicious occasion with you.<br><br>
+              We look forward to celebrating this auspicious occasion with you.🎂🎊<br><br>
               Best Regards,<br>
-              The Registration Team 💝</html>`, alternative: true }
+              <strong>The Registration Team 💝</strong>
+              </html>`, alternative: true }
         ]
       };
       await emailClient.sendAsync(message);
