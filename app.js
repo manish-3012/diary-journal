@@ -65,7 +65,7 @@ import('emailjs').then((emailjsModule) => {
 
   const emailConfig = {
     user: 'chhindwarabirthdaypuja@gmail.com',
-    password: 'yohzvqbvfdntikvk',
+    password: process.env.EMAIL_PASSWORD,
     host: 'smtp.gmail.com',
     ssl: true,
   };
@@ -83,7 +83,7 @@ import('emailjs').then((emailjsModule) => {
           { data: `<html>
               <strong>Dear ${userName}</strong>,<br>
               Jai Shri Mataji 🙏🏻💝<br><br>
-              Thank you for completing the registration process. We are delighted to inform you that your registration for the 101st Birthday Puja has been successful.😄<br><br>
+              Thank you for completing the registration process. We are delighted to inform you that your registration for the <strong>101st Birthday Puja</strong> has been successful.😄<br><br>
               Your Unique Registration Number (URN) is: <strong>${urn}</strong>.<br><br>
               We look forward to celebrating this auspicious occasion with you.🎂🎊<br><br>
               Best Regards,<br>

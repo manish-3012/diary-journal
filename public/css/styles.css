@@ -11398,3 +11398,14 @@ header.masthead .site-heading .h1 {
   grid-template-columns: auto 1fr;
   gap: 10px; /* Adjust the gap as needed */
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../assets/img/lotus.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 50%;
+}
