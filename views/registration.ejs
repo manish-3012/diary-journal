@@ -20,7 +20,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <p class="text-center mt-0 mb-2 fw-bold">Jai Shri Mataji! 🪷</p>
                 <p class="text-justify mt-0 fs-6">
-                    Dear Family, government regulations require Government ID details for Puja attendees. Your cooperation mean the world to us. 💖<br><span class="text-success fw-bold">(For foreigners please fill Passport No. in place of Aadhar)</span></p>
+                    Dear Family, government regulations require Government ID details for Puja attendees. Your cooperation mean the world to us. 💖<br><span class="text-success fs-5 fw-bold">(For foreigners please fill Passport No. in place of Aadhar)</span></p>
                 <form action="/registration" method="post">
                     <!-- Number of Adults -->
                     <div class="form-group">
@@ -83,9 +83,16 @@
                             <label for="payerDistrict">District:<span class="text-danger fw-bold">*</span></label>
                             <input type="text" class="form-control" name="payerDistrict" id="payerDistrict" required>
                         </div>
+                        <% const indianStates = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Lakshadweep", "Delhi", "Puducherry", "Others"]; %>
+                        
                         <div class="form-group col-md-4">
                             <label for="payerState">State:<span class="text-danger fw-bold">*</span></label>
-                            <input type="text" class="form-control" name="payerState" id="payerState" required>
+                            <select class="form-control" name="payerState" id="payerState" required>
+                                <option value="" disabled selected>Select State</option>
+                                <% indianStates.forEach(state => { %>
+                                    <option value="<%= state %>"><%= state %></option>
+                                <% }); %>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="payerPAN">AADHAAR/PAN:<span class="text-danger fw-bold">*</span></label>
@@ -105,8 +112,8 @@
                     <div class="mt-3 mb-2">
                         <h3  class="text-center">Payment Methods</h3>
                         <ul>
-                            <li>1️⃣ QR Code (क्यू आर कोड)</li>
-                            <li>2️⃣ Bank Details (बेंक विवरण अनुसार)</li>
+                            <li>1️⃣ QR Code <span class="hindi">(क्यू आर कोड)</span></li>
+                            <li>2️⃣ Bank Details <span class="hindi">(बेंक विवरण अनुसार)</span></li>
                         </ul>
                         <p class="text-center mb-0">══━━━━✥◈✥━━━━══</p>
                         <h3 class="text-center">1️⃣ QR Code</h3>
@@ -129,28 +136,37 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="utrNumber" class="fw-bold">UTR Number/UPI Number:<span class="text-danger fw-bold">*</span></label>
+                        <label for="utrNumber" class="fw-bold">UTR Number/UPI Number/Transaction ID:<span class="text-danger fw-bold">*</span></label>
                         <p class="mt-0 mb-3 fs-6">(In case of multiple numbers put <span class="fw-bold">' , '</span> to separate them.<br>For example: <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
                         <p class="mt-0 mb-2 hindi fs-6">(यदि कई संख्याएँ हैं तो उन्हें <span class="fw-bold">' , '</span> से अलग करें।<br>उदाहरण के लिए: <span class="fw-bold">573647863481, rohan@oksbi, 3678478582834</span> )</p>
                         <input type="text" class="form-control" name="utrNumber" id="utrNumber" required>
                     </div>
                     <hr>
                     <h3 class="text-center">Transportation Facility</h3>
-                    <p class="text-justify fw-bold mt-0 mb-2 fs-6">In case if you require transportation services from Nagpur to Chhindwara, please inform us of your arrival date and time.</p>
-                    <p class="text-justify fw-bold mt-0 hindi fs-6">
-                        अगर आप नागपुर से छिंदवाड़ा के लिए परिवहन सुविधा का उपयोग करना चाहते हैं तो कृपया अपने आगमन का समय और तिथि हमें सूचित करें।</p>
+                    <p class="text-justify mt-0 mb-2 fs-6">In case if you require transportation services from <span class="fw-bold">Nagpur to Chhindwara</span>, please inform us of your arrival date and time.</p>
+                    <p class="text-justify mt-0 hindi fs-6">
+                        अगर आप <span class="fw-bold">नागपुर से छिंदवाड़ा</span> के लिए परिवहन सुविधा का उपयोग करना चाहते हैं तो कृपया अपने आगमन का समय और तिथि हमें सूचित करें।</p>
                         <!-- Arrival Date and Time -->
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-row">
+                        <div class="form-group col-md-4">
                             <label for="arrivalDate" class="fw-bold">Arrival Date:</label>
                             <input type="date" class="form-control" name="arrivalDate" id="arrivalDate" >
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="arrivalTime" class="fw-bold">Arrival Time:</label>
                             <input type="time" class="form-control" name="arrivalTime" id="arrivalTime" >
                         </div>
+                        <div class="form-group col-md-4">
+                            <label for="arrivalLocation" class="fw-bold">Arrival Location:</label>
+                            <select class="form-control" name="arrivalLocation" id="arrivalLocation">
+                                <option value="" disabled selected>Select Arrival Location</option>
+                                <option value="bus stand">Nagpur Bus Stand</option>
+                                <option value="airport">Nagpur Airport</option>
+                                <option value="railway station">Nagpur Railway Station</option>
+                            </select>
+                        </div>
                     </div>
-
+                        
                     <!-- <h3 class="fw-bold fs-5 text-center text-success mb-3">Please bring a print out of the transaction as a payment proof!</h3> -->
                     <button type="submit" class="btn btn-success custom-btn  rounded mx-auto d-block">Submit</button>
                 </form>
@@ -174,8 +190,8 @@
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="${category}Aadhar${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Aadhar/PAN<span class="text-danger fw-bold">*</span></label>
-                            <input type="text" class="form-control" name="${category}Aadhar${i}" id="${category}Aadhar${i}" required>
+                            <label for="${category}Address${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Address:<span class="text-danger fw-bold">*</span></label>
+                            <input type="text" class="form-control" name="${category}Address${i}" id="${category}Address${i}" required>
                         </div>
 
                         <div class="form-group col-md-4">

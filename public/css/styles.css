@@ -11399,7 +11399,7 @@ header.masthead .site-heading .h1 {
   gap: 10px; /* Adjust the gap as needed */
 }
 
-body {
+/* body {
   margin: 0;
   padding: 0;
   background-image: url('../assets/img/lotus.png');
@@ -11408,4 +11408,4 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 50%;
-}
+} */

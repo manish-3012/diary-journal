@@ -163,28 +163,28 @@ import('emailjs').then((emailjsModule) => {
     // Loop through and save yuva details
     for (let i = 1; i <= numYuvas; i++) {
       const yuvaName = req.body[`yuvaName${i}`];
-      const yuvaAadhar = req.body[`yuvaAadhar${i}`];
+      const yuvaAddress = req.body[`yuvaAddress${i}`];
       const yuvaGender = req.body[`yuvaGender${i}`];
 
-      yuvaDetails.push({ name: yuvaName, aadharNo: yuvaAadhar, gender: yuvaGender });
+      yuvaDetails.push({ name: yuvaName, address: yuvaAddress, gender: yuvaGender });
     }
 
     // Loop through and save adult details
     for (let i = 1; i <= numAdults; i++) {
       const adultName = req.body[`adultName${i}`];
-      const adultAadhar = req.body[`adultAadhar${i}`];
+      const adultAddress = req.body[`adultAddress${i}`];
       const adultGender = req.body[`adultGender${i}`];
 
-      adultDetails.push({ name: adultName, aadharNo: adultAadhar, gender: adultGender });
+      adultDetails.push({ name: adultName, address: adultAddress, gender: adultGender });
     }
 
     // Loop through and save bal details
     for (let i = 1; i <= numBals; i++) {
       const balName = req.body[`balName${i}`];
-      const balAadhar = req.body[`balAadhar${i}`];
+      const balAddress = req.body[`balAddress${i}`];
       const balGender = req.body[`balGender${i}`];
 
-      balDetails.push({ name: balName, aadharNo: balAadhar, gender: balGender });
+      balDetails.push({ name: balName, address: balAddress, gender: balGender });
     }
     
     let payerDetails = {
