@@ -7,6 +7,7 @@ const homeStartingContent = "Your home content goes here...";
 const scheduleContent = "Your schedule content goes here...";
 const contactContent = "Your contact content goes here...";
 const registrationContent = "Your registration content goes here...";
+const privacyContent = "Your privacy content goes here...";
 
 const app = express();
 
@@ -129,6 +130,10 @@ import('emailjs').then((emailjsModule) => {
 
   app.get("/chhindwara",function(req,res){
     res.render("chhindwara",{content:scheduleContent});
+  });
+
+  app.get("/privacy",function(req,res){
+    res.render("privacy",{content:privacyContent});
   });
 
   app.get("/contact",function(req,res){
