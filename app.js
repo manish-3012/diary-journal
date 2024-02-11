@@ -106,6 +106,10 @@ import('emailjs').then((emailjsModule) => {
     await client.db("blog").collection("payerDetails").insertOne(newItem);
   }
 
+  async function insertSyDetails(client, details) {
+    await client.db("blog").collection("sydetails").insertMany(details);
+  }
+
   app.use(express.static(__dirname + "/public"));
 
   app.use(express.urlencoded({extended:true}));
@@ -157,6 +161,7 @@ import('emailjs').then((emailjsModule) => {
   });
 
   app.post("/registration", async function (req, res) {
+    let urn = generateurn();
     const numAdults = parseInt(req.body.numAdults, 10);
     const numYuvas = parseInt(req.body.numYuvas, 10);
     const numBals = parseInt(req.body.numBals, 10);
@@ -164,6 +169,7 @@ import('emailjs').then((emailjsModule) => {
     const yuvaDetails = [];
     const adultDetails = [];
     const balDetails = [];
+    const syDetails = [];
 
     // Loop through and save yuva details
     for (let i = 1; i <= numYuvas; i++) {
@@ -171,6 +177,7 @@ import('emailjs').then((emailjsModule) => {
       const yuvaAddress = req.body[`yuvaAddress${i}`];
       const yuvaGender = req.body[`yuvaGender${i}`];
 
+      syDetails.push({ name: yuvaName, address: yuvaAddress, gender: yuvaGender, mobile: req.body.payerMobile, category: "Y", urn:urn });
       yuvaDetails.push({ name: yuvaName, address: yuvaAddress, gender: yuvaGender });
     }
 
@@ -180,15 +187,17 @@ import('emailjs').then((emailjsModule) => {
       const adultAddress = req.body[`adultAddress${i}`];
       const adultGender = req.body[`adultGender${i}`];
 
+      syDetails.push({ name: adultName, address: adultAddress, gender: adultGender, mobile: req.body.payerMobile, category: "A", urn:urn });
       adultDetails.push({ name: adultName, address: adultAddress, gender: adultGender });
     }
-
+    
     // Loop through and save bal details
     for (let i = 1; i <= numBals; i++) {
       const balName = req.body[`balName${i}`];
       const balAddress = req.body[`balAddress${i}`];
       const balGender = req.body[`balGender${i}`];
-
+      
+      syDetails.push({ name: balName, address: balAddress, gender: balGender, mobile: req.body.payerMobile, category: "C", urn:urn });
       balDetails.push({ name: balName, address: balAddress, gender: balGender });
     }
     
@@ -208,7 +217,6 @@ import('emailjs').then((emailjsModule) => {
     // console.log(req.body);
     
     try {
-      let urn = generateurn();
       const totalAmount = parseInt(req.body.totalAmount, 10)
       
       await insertNewRegex(client, {
@@ -233,6 +241,7 @@ import('emailjs').then((emailjsModule) => {
         totalAmount:totalAmount,
         amountReceived:0
       });
+      await insertSyDetails(client, syDetails);
       if (payerEmail) {
         await sendEmail(urn, payerEmail, payerName);
       }
