@@ -239,7 +239,8 @@ import('emailjs').then((emailjsModule) => {
         urn: urn,
         utrNumber:req.body.utrNumber,
         totalAmount:totalAmount,
-        amountReceived:0
+        amountReceived:0,
+        registrationDate: new Date(),
       });
       await insertSyDetails(client, syDetails);
       if (payerEmail) {
@@ -255,7 +256,6 @@ import('emailjs').then((emailjsModule) => {
 }).catch((error) => {
   console.error('Error importing emailjs:', error);
 });
-
 
 // app.listen(3000, function() {
 //     console.log("Server started on port 3000");
