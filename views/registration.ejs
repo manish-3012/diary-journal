@@ -25,6 +25,7 @@
                         <select class="form-control" name="registrationDuration" id="registrationDuration" required>
                             <option value="threedaysseminar">Three Days Seminar & Puja Registration</option>
                             <option value="onedaypuja">One Day Puja Registration</option>
+                            <option value="filledPrice">Already Paid</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -234,6 +235,12 @@
                 bal: 1200
             };
 
+            const filledPrices = {
+                adult: 2000,
+                yuva: 1500,
+                bal: 1000
+            };
+
             const foreignerPrices = {
                 adult: 5000,
                 yuva: 5000,
@@ -250,13 +257,15 @@
             const registrationDuration = $("#registrationDuration").val();
             let prices;
 
-            if (registrationDuration === "threedaysseminar") {
+            if (registrationDuration === "filledPrice"){
+                prices = filledPrices;
+            } else if (registrationDuration === "threedaysseminar") {
                 if (registrationType === "foreigner") {
                     prices = foreignerPrices;
                 } else {
                     prices = nonForeignerPrices;
                 }
-            } else {
+            }  else {
                 if (registrationType === "foreigner") {
                     prices = foreignerPrices;
                 } else {
